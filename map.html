@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивна модель Київської фортеці</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            width: 80%;
+            margin: auto;
+        }
+        .building {
+            fill: lightgray;
+            stroke: black;
+            cursor: pointer;
+        }
+        .building:hover {
+            fill: darkgray;
+        }
+        #info {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #info img {
+            max-width: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Інтерактивна карта Київської фортеці</h2>
+    <div id="map"></div>
+    <div id="info">
+        <h3 id="building-name">Наведіть на будівлю</h3>
+        <p id="building-desc">Тут з'явиться опис будівлі</p>
+        <img id="building-img" src="" alt="" style="display: none;">
+    </div>
+
+    <script>
+        const buildings = [
+            { id: "gate", name: "Головна брама", desc: "Вхідна брама Київської фортеці, побудована у XIX столітті.", img: "gate.jpg", path: "M50,50 L150,50 L150,150 L50,150 Z" },
+            { id: "bastion", name: "Бастіон №3", desc: "Один з головних бастіонів фортеці, що використовувався для оборони.", img: "bastion.jpg", path: "M180,30 L280,50 L260,150 L160,130 Z" },
+            { id: "tower", name: "Оборонна вежа", desc: "Кругла оборонна вежа, що служила пунктом спостереження.", img: "tower.jpg", path: "M300,100 C320,50 380,50 400,100 C380,150 320,150 300,100" },
+            { id: "arsenal", name: "Арсенал", desc: "Склад зброї та амуніції, важливий стратегічний об'єкт.", img: "arsenal.jpg", path: "M100,200 L200,180 L250,250 L150,270 Z" },
+            { id: "barracks", name: "Казарми", desc: "Будівля, де розміщувалися військові гарнізони.", img: "barracks.jpg", path: "M220,220 L320,210 L350,290 L250,300 Z" }
+        ];
+
+        const svg = d3.select("#map")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 400);
+
+        svg.selectAll(".building")
+            .data(buildings)
+            .enter()
+            .append("path")
+            .attr("class", "building")
+            .attr("d", d => d.path)
+            .on("mouseover", (event, d) => {
+                d3.select("#building-name").text(d.name);
+                d3.select("#building-desc").text(d.desc);
+                d3.select("#building-img").attr("src", d.img).style("display", "block");
+            })
+            .on("mouseout", () => {
+                d3.select("#building-name").text("Наведіть на будівлю");
+                d3.select("#building-desc").text("Тут з'явиться опис будівлі");
+                d3.select("#building-img").style("display", "none");
+            });
+    </script>
+</body>
+</html>
