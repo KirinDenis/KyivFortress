@@ -1723,6 +1723,39 @@ button,
     .features article .icon:before {
       font-size: 1.25rem; } }
 
+
+							.custom-ratio {
+								position: relative;
+								width: 100%;
+								padding-top: 40%;
+							}
+
+							.custom-ratio video,
+							.custom-ratio iframe {
+								position: absolute;
+								top: 0;
+								left: 0;
+								width: 100%;
+								height: 50%;
+							}
+
+
+							.custom-ratio2 {
+								position: relative;
+								width: 100%;
+								padding-top: 40%;
+							}
+
+							.custom-ratio2 video,
+							.custom-ratio2 iframe {
+								position: absolute;
+								top: 0;
+								left: 0;
+								width: 100%;
+								height: 100%;
+							}
+
+
 /* Posts */
 .posts {
   display: -moz-flex;
